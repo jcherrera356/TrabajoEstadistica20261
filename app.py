@@ -7,6 +7,32 @@ import plotly.express as px
 st.set_page_config(page_title="Informe Estadístico - Ejercicio 10", layout="wide")
 
 # =========================
+# PORTADA
+# =========================
+st.markdown("""
+<div style='text-align:center; padding-top:60px; padding-bottom:60px;'>
+
+
+<h2 style='margin-bottom:30px;'>Taller de Seguimiento 1 — Punto #10</h2>
+
+<hr style='width:60%; margin:auto; margin-bottom:30px;'>
+
+<h3 style='margin-bottom:5px;'>Juan Camilo Herrera Osorio</h3>
+<p style='margin:2px;'>Estadística para Analítica — 6:00 p.m</p>
+<p style='margin:2px;'>Periodo: 2026-1</p>
+<p style='margin:2px;'>PG1051 — Lunes y Miércoles</p>
+
+<br>
+
+<p style='font-size:14px; color:gray;'>Institución Universitaria Pascual Bravo — Informe generado en Streamlit y Python</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+
+# =========================
 # 1) DATA DEL EJERCICIO 10
 # =========================
 data = [
@@ -114,7 +140,7 @@ def interpretar_r(r: float) -> str:
     elif ar >= 0.30:
         fuerza = "débil"
     else:
-        fuerza = "muy débil o casi nula"
+        fuerza = "muy débil o casi nulaa"
 
     sentido = "positiva" if r > 0 else "negativa" if r < 0 else "nula"
     return f"Correlación {sentido} {fuerza} (r={r:.3f})."
@@ -198,25 +224,37 @@ for i, c in enumerate(numeric_cols):
         fig_bar = px.bar(freq, x=c, y="Frecuencia", title=f"Frecuencia - {c}")
         st.plotly_chart(fig_bar, use_container_width=True)
 
-st.subheader("Diagramas de caja (boxplot)")
-box_cols = st.columns(3)
-for i, c in enumerate(numeric_cols):
-    with box_cols[i % 3]:
-        fig_box = px.box(df, y=c, title=f"Boxplot - {c}")
-        st.plotly_chart(fig_box, use_container_width=True)
-
 # =========================
 # 9) 5. Interpretación / Conclusiones
 # =========================
 st.header("5) Interpretación (conclusiones)")
-st.write(
-    """
-- Con la tabla de tendencia central puedes describir el “nivel típico” del grupo en cada variable.
-- Con la dispersión puedes decir si el grupo es homogéneo o si hay mucha variación.
-- Los cuartiles y percentiles de las notas (Mat y Est) te ayudan a ubicar a un estudiante dentro del grupo.
-- Las correlaciones te dicen si se ve relación entre estudiar y la nota, y entre estrés y desempeño.
-"""
-)
+
+st.markdown(f"""
+### Características principales del grupo
+- El grupo está compuesto por **12 estudiantes**. La edad se concentra alrededor de **20 años** (media ≈ **20.25**, mediana = **20**), así que es un grupo bastante homogéneo en edad.
+- En rendimiento académico, el promedio fue **3.58** en Matemáticas y **3.78** en Estadística. En general, el grupo se mueve entre un desempeño **medio a bueno**.
+- En hábitos de estudio, el grupo reporta en promedio **10 horas** (mediana **9.5**). En estrés, el promedio fue **≈ 5.92** (mediana **6**), es decir, un nivel de estrés **medio**.
+
+### Dispersión (qué tanto varían entre ellos)
+- **Edad**: poca variación (rango **5** años), el grupo es parejo.
+- **Horas de estudio**: es de lo que más cambia entre estudiantes (rango **11** horas), hay estudiantes que estudian muy poco y otros bastante.
+- **Estrés**: también varía mucho (rango **6** puntos). No todos viven la carga igual.
+- Las notas tienen variación moderada: Matemáticas (de **2.5** a **4.6**) y Estadística (de **2.8** a **4.8**).
+
+### Posición (notas por cuartiles)
+- En Matemáticas, el 50% central de las notas está entre **Q1=3.125** y **Q3=4.025** (la mitad del grupo cae en ese rango).
+- En Estadística, el 50% central está entre **Q1=3.35** y **Q3=4.225**.
+
+### Tendencias y relaciones relevantes (correlación)
+- Se observa una relación **muy fuerte y positiva** entre **Horas de estudio** y **Nota en Estadística** (**r ≈ 0.989**).  
+  Esto sugiere que, en este grupo, **a más horas de estudio, mejor nota en Estadística**.
+- Se observa una relación **muy fuerte y negativa** entre **Nivel de estrés** y **Nota en Matemáticas** (**r ≈ -0.977**).  
+  Esto sugiere que, en este grupo, **a mayor estrés, tiende a bajar la nota en Matemáticas**.
+
+### Casos que ayudan a entender el comportamiento
+- El estudiante con mayor rendimiento (por ejemplo, **16 horas de estudio**, estrés **bajo**) coincide con notas altas.
+- El estudiante con menor rendimiento (por ejemplo, **5 horas de estudio**, estrés **alto**) coincide con notas bajas.
+""")
 
 # =========================
 # 10) DESCARGA (Excel)
