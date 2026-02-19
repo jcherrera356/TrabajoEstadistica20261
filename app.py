@@ -18,6 +18,8 @@ st.markdown("""
 <hr style='width:60%; margin:auto; margin-bottom:30px;'>
 
 <h3 style='margin-bottom:5px;'>Juan Camilo Herrera Osorio</h3>
+<h3 style='margin-bottom:5px;'>Esteban Espinosa Arboleda</h3>
+
 <p style='margin:2px;'>Estadística para Analítica — 6:00 p.m</p>
 <p style='margin:2px;'>Periodo: 2026-1</p>
 <p style='margin:2px;'>PG1051 — Lunes y Miércoles</p>
